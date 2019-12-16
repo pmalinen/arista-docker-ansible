@@ -1,0 +1,39 @@
+version: '3'
+services:
+  ceos-1:
+    hostname: ansible-ceos2
+    image: "ceos:4.23.1F"
+    command: /sbin/init systemd.setenv=INTFTYPE=eth systemd.setenv=ETBA=1 systemd.setenv=SKIP_ZEROTOUCH_BARRIER_IN_SYSDBINIT=1 systemd.setenv=CEOS=1 systemd.setenv=EOS_PLATFORM=ceoslab systemd.setenv=container=docker
+    privileged: true
+    environment:
+      container: docker
+      CEOS: 1
+      EOS_PLATFORM: ceoslab
+      SKIP_ZEROTOUCH_BARRIER_IN_SYSDBINIT: 1
+      ETBA: 1
+      INTFTYPE: eth
+    networks:
+      default:
+      p2p:
+    ports:
+      - 8000:443
+  ceos-2:
+    hostname: ansible-ceos2
+    image: "ceos:4.23.1F"
+    command: /sbin/init systemd.setenv=INTFTYPE=eth systemd.setenv=ETBA=1 systemd.setenv=SKIP_ZEROTOUCH_BARRIER_IN_SYSDBINIT=1 systemd.setenv=CEOS=1 systemd.setenv=EOS_PLATFORM=ceoslab systemd.setenv=container=docker
+    privileged: true
+    environment:
+      container: docker
+      CEOS: 1
+      EOS_PLATFORM: ceoslab
+      SKIP_ZEROTOUCH_BARRIER_IN_SYSDBINIT: 1
+      ETBA: 1
+      INTFTYPE: eth
+    networks:
+      default:
+      p2p:
+    ports:
+      - 8001:443
+
+networks:
+  p2p:
